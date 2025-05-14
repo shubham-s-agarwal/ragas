@@ -194,8 +194,6 @@ class PydanticPrompt(BasePrompt, t.Generic[InputModel, OutputModel]):
             stop=stop,
             callbacks=prompt_cb,
         )
-        print("OUTPUT FROM LLM:", resp)
-        print("OUTPUT:",resp.generations)
         output_models = []
         parser = RagasOutputParser(pydantic_object=self.output_model)
         for i in range(n):
@@ -213,6 +211,7 @@ class PydanticPrompt(BasePrompt, t.Generic[InputModel, OutputModel]):
             except RagasOutputParserException as e:
                 prompt_rm.on_chain_error(error=e)
                 logger.error("Prompt %s failed to parse output: %s", self.name, e)
+                print("Failed for this: ", resp)
                 raise e
 
         prompt_rm.on_chain_end({"output": output_models})
