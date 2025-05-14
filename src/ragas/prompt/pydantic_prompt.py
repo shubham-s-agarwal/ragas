@@ -194,7 +194,8 @@ class PydanticPrompt(BasePrompt, t.Generic[InputModel, OutputModel]):
             stop=stop,
             callbacks=prompt_cb,
         )
-
+        print("OUTPUT FROM LLM:", resp)
+        print("OUTPUT:",resp.generations)
         output_models = []
         parser = RagasOutputParser(pydantic_object=self.output_model)
         for i in range(n):
