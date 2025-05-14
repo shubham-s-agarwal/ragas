@@ -190,7 +190,7 @@ class PydanticPrompt(BasePrompt, t.Generic[InputModel, OutputModel]):
         resp = await llm.generate(
             prompt_value,
             n=n,
-            temperature=temperature,
+            temperature=0.5,
             stop=stop,
             callbacks=prompt_cb,
         )
